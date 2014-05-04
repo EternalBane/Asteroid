@@ -60,10 +60,12 @@ public class ViewManager {
 
 		}
 		else if(view==OPTIONS){
-
+			OptionsView optionsView = new OptionsView(mainWindow);
+			this.view = optionsView;
 		}
 		else if(view==PREPARE_GAME){
-
+			ConfigureGameView configureGameView = new ConfigureGameView(mainWindow);
+			this.view = configureGameView;
 		}
 		
 		mainWindow.setView(this.view);

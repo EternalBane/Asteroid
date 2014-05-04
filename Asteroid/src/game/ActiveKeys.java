@@ -8,6 +8,7 @@ public class ActiveKeys implements KeyListener {
 	private boolean set;
 	public static int LEFT,RIGHT,DOWN,UP,PROTECT,SHOOT;
 	private String setType;
+	private OptionsView optionsView;
 	
 	ActiveKeys(MainWindow frame){
 		LEFT = frame.config.getLeft();
@@ -74,6 +75,7 @@ public class ActiveKeys implements KeyListener {
 			else if(setType.equals("SHOOT"))
 				SHOOT = e.getKeyCode();
 			
+			optionsView.setKey(setType,getKeyChar(e.getKeyCode()));
 			set = false;
 		}
 	}
@@ -99,5 +101,10 @@ public class ActiveKeys implements KeyListener {
 	}
 	public void unsetKey(){
 		set = false;
+	}
+	public void setKey(String key, OptionsView optionsView){
+		this.optionsView = optionsView;
+		setType = key;
+		set = true;
 	}
 }
