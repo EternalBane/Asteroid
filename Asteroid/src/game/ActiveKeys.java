@@ -83,13 +83,13 @@ public class ActiveKeys implements KeyListener {
 		if(key==32)
 			return "Spacja";
 		if(key==37)
-			return "Lewo";
+			return "Strza³ka w lewo";
 		if(key==38)
-			return "Góra";
+			return "Strza³ka w górê";
 		if(key==39)
-			return "Prawo";
+			return "Strza³ka w prawo";
 		if(key==40)
-			return "Dó³";
+			return "Strza³ka w dó³";
 		else
 			return KeyEvent.getKeyText(key);
 	}

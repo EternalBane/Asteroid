@@ -13,8 +13,8 @@ import javax.swing.border.Border;
 
 public class OptionsView extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
-	private JButton bBackToMenu;
-	private MainWindow frame;
+	private MenuButton bBackToMenu;
+	private MainWindow mainWindow;
 	private Sprite bg;
 	private JLabel bgLabel;
 	private JTextField tfLeft,tfRight,tfUp,tfDown,tfProtect,tfShoot;
@@ -28,8 +28,8 @@ public class OptionsView extends JPanel implements ActionListener {
 	Border borderBlack = BorderFactory.createMatteBorder(2,2,2,2,Color.black);
 	
 	
-	OptionsView(MainWindow frame){
-		this.frame = frame;
+	OptionsView(MainWindow mainWindow){
+		this.mainWindow = mainWindow;
 		setLayout(null);
 		menuY = 348;
 	
@@ -40,8 +40,9 @@ public class OptionsView extends JPanel implements ActionListener {
 		bgLabel = new JLabel(bg.getImageIcon());
 		bgLabel.setBounds(0,0,MainWindow.WIDTH,MainWindow.HEIGHT);
 		
-		bBackToMenu = new JButton("Wróæ do menu");
-		bBackToMenu.setBounds(0,MainWindow.HEIGHT-40,200,20);
+		bBackToMenu = new MenuButton(mainWindow,"bBackToMenu.png",MainWindow.HEIGHT-40);
+		bBackToMenu.setX(20);
+		bBackToMenu.setBounds(bBackToMenu.getX(),bBackToMenu.getY(),bBackToMenu.getWidth(),bBackToMenu.getHeight());
 		bBackToMenu.addActionListener(this);
 		
 		tfLeft = createMyTextField(ActiveKeys.LEFT);
@@ -52,7 +53,7 @@ public class OptionsView extends JPanel implements ActionListener {
 		tfShoot = createMyTextField(ActiveKeys.SHOOT);
 		
 		bSound = new JButton();
-		bSound.setBounds(330,320,100,20);
+		bSound.setBounds(370,320,100,20);
 		bSound.addActionListener(this);
 		bSound.setContentAreaFilled(false);
 		bSound.setBorder(null);
@@ -66,21 +67,21 @@ public class OptionsView extends JPanel implements ActionListener {
 		bProtect = createMyButton();
 		bShoot = createMyButton();
 		
-		tfLeft.setBounds(330,345,100,20);
-		tfRight.setBounds(330,370,100,20);
-		tfUp.setBounds(330,395,100,20);
-		tfDown.setBounds(330,420,100,20);
-		tfProtect.setBounds(330,445,100,20);
-		tfShoot.setBounds(330,470,100,20);
+		tfLeft.setBounds(370,345,100,20);
+		tfRight.setBounds(370,370,100,20);
+		tfUp.setBounds(370,395,100,20);
+		tfDown.setBounds(370,420,100,20);
+		tfProtect.setBounds(370,445,100,20);
+		tfShoot.setBounds(370,470,100,20);
 		
 		
-		lSound = createLabel("bSound.png",210,320);
-		lLeft = createLabel("bLeft.png",210,345);
-		lRight = createLabel("bRight.png",210,370);
-		lUp = createLabel("bForward.png",210,395);
-		lDown = createLabel("bSlowDown.png",210,420);
-		lProtect = createLabel("bShield.png",210,445);
-		lShoot = createLabel("bShot.png",210,470);
+		lSound = createLabel("bSound.png",250,320);
+		lLeft = createLabel("bLeft.png",250,345);
+		lRight = createLabel("bRight.png",250,370);
+		lUp = createLabel("bForward.png",250,395);
+		lDown = createLabel("bSlowDown.png",250,420);
+		lProtect = createLabel("bShield.png",250,445);
+		lShoot = createLabel("bShot.png",250,470);
 		
 		add(lSound);
 		add(lLeft);
@@ -129,8 +130,8 @@ public class OptionsView extends JPanel implements ActionListener {
 		return tf;
 	}
 	private MenuButton createMyButton(){
-		MenuButton b = new MenuButton(frame,"bChange.png",menuY);
-		b.setX(440);
+		MenuButton b = new MenuButton(mainWindow,"bChange.png",menuY);
+		b.setX(480);
 		b.setBounds(b.getX(),b.getY(),b.getWidth(),b.getHeight());
 		b.addActionListener(this);
 		menuY+=25;
@@ -140,27 +141,27 @@ public class OptionsView extends JPanel implements ActionListener {
 	
 	protected void setKey(String type,String key){
 		if(type.equals("LEFT")){
-			frame.config.setLeft(ActiveKeys.LEFT);
+			mainWindow.config.setLeft(ActiveKeys.LEFT);
 			editKey(tfLeft,key,borderBlack);
 		}
 		else if(type.equals("RIGHT")){
-			frame.config.setRight(ActiveKeys.RIGHT);
+			mainWindow.config.setRight(ActiveKeys.RIGHT);
 			editKey(tfRight,key,borderBlack);
 		}
 		else if(type.equals("UP")){
-			frame.config.setUp(ActiveKeys.UP);
+			mainWindow.config.setUp(ActiveKeys.UP);
 			editKey(tfUp,key,borderBlack);
 		}
 		else if(type.equals("DOWN")){
-			frame.config.setDown(ActiveKeys.DOWN);
+			mainWindow.config.setDown(ActiveKeys.DOWN);
 			editKey(tfDown,key,borderBlack);
 		}
 		else if(type.equals("PROTECT")){
-			frame.config.setProtect(ActiveKeys.PROTECT);
+			mainWindow.config.setProtect(ActiveKeys.PROTECT);
 			editKey(tfProtect,key,borderBlack);
 		}
 		else if(type.equals("SHOOT")){
-			frame.config.setShoot(ActiveKeys.SHOOT);
+			mainWindow.config.setShoot(ActiveKeys.SHOOT);
 			editKey(tfShoot,key,borderBlack);
 		}
 	}
@@ -173,36 +174,36 @@ public class OptionsView extends JPanel implements ActionListener {
 		Object obj = e.getSource();
 		
 		if(obj==bBackToMenu)
-			frame.viewManager.setView(ViewManager.MENU);
+			mainWindow.viewManager.setView(ViewManager.MENU);
 		else if(obj==bLeft){
 			editKey(tfLeft,null,borderGreen);
-			frame.activeKeys.setKey("LEFT",this);
+			mainWindow.activeKeys.setKey("LEFT",this);
 		}
 		else if(obj==bRight){
 			editKey(tfRight,null,borderGreen);
-			frame.activeKeys.setKey("RIGHT",this);
+			mainWindow.activeKeys.setKey("RIGHT",this);
 		}
 		else if(obj==bUp){
 			editKey(tfUp,null,borderGreen);
-			frame.activeKeys.setKey("UP",this);
+			mainWindow.activeKeys.setKey("UP",this);
 		}
 		else if(obj==bDown){
 			editKey(tfDown,null,borderGreen);
-			frame.activeKeys.setKey("DOWN",this);
+			mainWindow.activeKeys.setKey("DOWN",this);
 		}
 		else if(obj==bProtect){
 			editKey(tfProtect,null,borderGreen);
-			frame.activeKeys.setKey("PROTECT",this);
+			mainWindow.activeKeys.setKey("PROTECT",this);
 		}
 		else if(obj==bShoot){
 			editKey(tfShoot,null,borderGreen);
-			frame.activeKeys.setKey("SHOOT",this);
+			mainWindow.activeKeys.setKey("SHOOT",this);
 		}
 		else if(obj==bSound){
 			SoundManager.setSound(!SoundManager.sound);
-			frame.config.setSound(SoundManager.sound);
+			mainWindow.config.setSound(SoundManager.sound);
 			soundButton();
 		}
-		frame.requestFocusInWindow();
+		mainWindow.requestFocusInWindow();
 	}
 }

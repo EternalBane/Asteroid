@@ -57,7 +57,8 @@ public class ViewManager {
 			this.view = gameOverView;
 		}
 		else if(view==RANK){
-
+			RankingView rankingView = new RankingView(mainWindow);
+			this.view = rankingView;
 		}
 		else if(view==OPTIONS){
 			OptionsView optionsView = new OptionsView(mainWindow);

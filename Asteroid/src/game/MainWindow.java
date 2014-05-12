@@ -17,6 +17,7 @@ public class MainWindow extends JFrame implements WindowListener  {
 	protected ViewManager viewManager;
 	protected SoundManager soundManager;
 	protected Config config;
+	protected Ranking ranking;
 	
 	MainWindow(){
 		setTitle("Asteroid");
@@ -27,10 +28,12 @@ public class MainWindow extends JFrame implements WindowListener  {
 					
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setSize(WIDTH+6,HEIGHT+26);
+		setPreferredSize(new Dimension(WIDTH,HEIGHT));
 		setLocation((screenSize.width-getWidth())/2,(screenSize.height-getHeight())/2);
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/asteroid.png")));
 		
+		ranking = new Ranking();
 		config = new Config();
 		soundManager = new SoundManager();
 		activeKeys = new ActiveKeys(this);
