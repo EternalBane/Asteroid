@@ -26,6 +26,8 @@ public class Ranking {
 		readXML();
 	}
 	public boolean checkScore(int score){
+		if(list.length==0)
+			return true;
 		for(int i=0; i<list.length; i++)
 			if(score>str2Int(list[i][0]))
 				return true;

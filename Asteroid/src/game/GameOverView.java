@@ -89,10 +89,10 @@ public class GameOverView extends JPanel implements ActionListener {
 			add(labSetName);
 			add(tfName);
 			add(bOK);
+			add(container);
 		}
 		
 		add(bBackToMenu);
-		add(container);
 		add(bgLabel);
 	}
 	public void actionPerformed(ActionEvent e) {
