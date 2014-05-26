@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -84,6 +85,7 @@ public class Ranking {
 	private void xmlWrite(String name, String score) {
         try {
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            docFactory.setValidating(true);
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
             org.w3c.dom.Document doc = docBuilder.parse(xml);
 
@@ -101,6 +103,8 @@ public class Ranking {
             root.appendChild(player);
             
             data.appendChild(player);
+            
+
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
